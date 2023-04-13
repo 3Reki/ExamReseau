@@ -5,12 +5,15 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Client : MonoBehaviour
 {
-    [SerializeField] private InputField _inputField;
+    [SerializeField] private TMP_InputField _inputField;
+    [SerializeField] private string ip;
+    [SerializeField] private int port;
     
     private StreamReader _reader;
     private StreamWriter _writer;
@@ -22,19 +25,19 @@ public class Client : MonoBehaviour
     {
         Init();
     }
-    
 
-    public void SendMessage(string text)
+    public async void SendMessage(string text)
     {
         DateTime dat_time = new DateTime(1970, 1, 1, 0, 0, 0, 0);
         _writer.WriteLine($"{dat_time.AddSeconds(DateTime.Now.Second)} : {text}");
-        //await _writer.FlushAsync();
+        Debug.Log("Log");
+        await _writer.FlushAsync();
     }
 
     public async void Init()
     {
         _client = new TcpClient();
-        await _client.ConnectAsync("10.51.0.177", 666);
+        await _client.ConnectAsync(ip, port);
         
         _stream = _client.GetStream();
         _reader = new StreamReader(_stream);
@@ -57,6 +60,7 @@ public class Client : MonoBehaviour
         }
 
         _=DisplayLines();
+        
         Console.WriteLine("Type a line to send to the server");
         while (true)
         {
