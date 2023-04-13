@@ -1,0 +1,30 @@
+D:\Jean Noel\Network\Network\bin\Debug\net6.0\Network.exe
+D:\Jean Noel\Network\Network\bin\Debug\net6.0\Network.deps.json
+D:\Jean Noel\Network\Network\bin\Debug\net6.0\Network.runtimeconfig.json
+D:\Jean Noel\Network\Network\bin\Debug\net6.0\Network.dll
+D:\Jean Noel\Network\Network\bin\Debug\net6.0\Network.pdb
+D:\Jean Noel\Network\Network\obj\Debug\net6.0\Network.csproj.AssemblyReference.cache
+D:\Jean Noel\Network\Network\obj\Debug\net6.0\Network.GeneratedMSBuildEditorConfig.editorconfig
+D:\Jean Noel\Network\Network\obj\Debug\net6.0\Network.AssemblyInfoInputs.cache
+D:\Jean Noel\Network\Network\obj\Debug\net6.0\Network.AssemblyInfo.cs
+D:\Jean Noel\Network\Network\obj\Debug\net6.0\Network.csproj.CoreCompileInputs.cache
+D:\Jean Noel\Network\Network\obj\Debug\net6.0\Network.dll
+D:\Jean Noel\Network\Network\obj\Debug\net6.0\refint\Network.dll
+D:\Jean Noel\Network\Network\obj\Debug\net6.0\Network.pdb
+D:\Jean Noel\Network\Network\obj\Debug\net6.0\Network.genruntimeconfig.cache
+D:\Jean Noel\Network\Network\obj\Debug\net6.0\ref\Network.dll
+D:\Unity\ExamReseau\Server\Network\bin\Debug\net6.0\Network.exe
+D:\Unity\ExamReseau\Server\Network\bin\Debug\net6.0\Network.deps.json
+D:\Unity\ExamReseau\Server\Network\bin\Debug\net6.0\Network.runtimeconfig.json
+D:\Unity\ExamReseau\Server\Network\bin\Debug\net6.0\Network.dll
+D:\Unity\ExamReseau\Server\Network\bin\Debug\net6.0\Network.pdb
+D:\Unity\ExamReseau\Server\Network\obj\Debug\net6.0\Network.csproj.AssemblyReference.cache
+D:\Unity\ExamReseau\Server\Network\obj\Debug\net6.0\Network.GeneratedMSBuildEditorConfig.editorconfig
+D:\Unity\ExamReseau\Server\Network\obj\Debug\net6.0\Network.AssemblyInfoInputs.cache
+D:\Unity\ExamReseau\Server\Network\obj\Debug\net6.0\Network.AssemblyInfo.cs
+D:\Unity\ExamReseau\Server\Network\obj\Debug\net6.0\Network.csproj.CoreCompileInputs.cache
+D:\Unity\ExamReseau\Server\Network\obj\Debug\net6.0\Network.dll
+D:\Unity\ExamReseau\Server\Network\obj\Debug\net6.0\refint\Network.dll
+D:\Unity\ExamReseau\Server\Network\obj\Debug\net6.0\Network.pdb
+D:\Unity\ExamReseau\Server\Network\obj\Debug\net6.0\Network.genruntimeconfig.cache
+D:\Unity\ExamReseau\Server\Network\obj\Debug\net6.0\ref\Network.dll
