@@ -30,8 +30,7 @@ public class Client : MonoBehaviour
     public async void SendMessage(string text)
     {
         Debug.Log($"{DateTime.Now.ToString(("dd/MM/yyyy"))} {DateTime.Now.ToString("HH:mm")} : {text}");
-        _writer.WriteLine($"{DateTime.Now.ToString(("dd/mm/yyyy"))} : {text}");
-        GetTextField().text += $"{DateTime.Now.ToString(("dd/MM/yyyy"))} {DateTime.Now.ToString("HH:mm")} : {text}\n";
+        _writer.WriteLine($"{DateTime.Now.ToString(("dd/MM/yyyy"))} {DateTime.Now.ToString("HH:mm")} : {text}");
         await _writer.FlushAsync();
     }
 
@@ -47,36 +46,34 @@ public class Client : MonoBehaviour
         _textField.text = "";
     }
     
+    // C'est plus utile ce truc si ?
     public async Task Run()
     {
         // Connexion
-            
         async Task DisplayLines()
         {
             var newLine = await _reader.ReadLineAsync();
                 
             while(newLine != null)
             {
-                Console.WriteLine(newLine);
+                WriteText(newLine);
                 newLine = await _reader.ReadLineAsync();
             }
         }
-
         _=DisplayLines();
-        
-        Console.WriteLine("Type a line to send to the server");
+        Debug.Log("Type a line to send to the server");
         while (true)
         {
+            
             var lineToSend = Console.ReadLine();
             //Ligne envoyée
-                
-            //_writer.WriteLine($"{dat_time.AddSeconds(DateTime.Now.Second)} : {lineToSend}");
+            _writer.WriteLine($"{DateTime.Now.ToString(("dd/mm/yyyy"))} : {lineToSend}");
             await _writer.FlushAsync();
         }
     }
 
-    public TMP_Text GetTextField()
+    public void WriteText(string text)
     {
-        return _textField;
+        _textField.text += text + "\n";
     }
 }

@@ -34,7 +34,6 @@ namespace NetworkServer
                     _clients.Add(client, writer);
                     Console.WriteLine("Client connected");
 
-
                     var nextLine = await reader.ReadLineAsync();
                     while (nextLine != null)
                     {
