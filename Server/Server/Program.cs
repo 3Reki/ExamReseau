@@ -32,6 +32,7 @@ namespace NetworkServer
                     using var reader = new StreamReader(stream, leaveOpen: true);
                     using var writer = new StreamWriter(stream, leaveOpen: true);
                     _clients.Add(client, writer);
+                    Console.WriteLine("Client connected");
 
 
                     var nextLine = await reader.ReadLineAsync();
@@ -49,6 +50,7 @@ namespace NetworkServer
             }    
             catch(Exception)
             {
+                Console.WriteLine("Wtf ça marche pas");
             }
             finally
             {

@@ -11,6 +11,7 @@ using UnityEngine.UI;
 
 public class Client : MonoBehaviour
 {
+    [SerializeField] private TMP_Text _textField;
     [SerializeField] private TMP_InputField _inputField;
     [SerializeField] private string ip;
     [SerializeField] private int port;
@@ -28,9 +29,9 @@ public class Client : MonoBehaviour
 
     public async void SendMessage(string text)
     {
-        DateTime dat_time = new DateTime(1970, 1, 1, 0, 0, 0, 0);
-        _writer.WriteLine($"{dat_time.AddSeconds(DateTime.Now.Second)} : {text}");
-        Debug.Log("Log");
+        Debug.Log($"{DateTime.Now.ToString(("dd/MM/yyyy"))} {DateTime.Now.ToString("HH:mm")} : {text}");
+        _writer.WriteLine($"{DateTime.Now.ToString(("dd/mm/yyyy"))} : {text}");
+        GetTextField().text += $"{DateTime.Now.ToString(("dd/MM/yyyy"))} {DateTime.Now.ToString("HH:mm")} : {text}\n";
         await _writer.FlushAsync();
     }
 
@@ -42,6 +43,8 @@ public class Client : MonoBehaviour
         _stream = _client.GetStream();
         _reader = new StreamReader(_stream);
         _writer = new StreamWriter(_stream);
+
+        _textField.text = "";
     }
     
     public async Task Run()
@@ -70,5 +73,10 @@ public class Client : MonoBehaviour
             //_writer.WriteLine($"{dat_time.AddSeconds(DateTime.Now.Second)} : {lineToSend}");
             await _writer.FlushAsync();
         }
+    }
+
+    public TMP_Text GetTextField()
+    {
+        return _textField;
     }
 }
