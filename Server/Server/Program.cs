@@ -1,4 +1,5 @@
 ﻿using System.Net.Sockets;
+using System.Text.Json;
 using NetworkServer;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -31,12 +32,14 @@ namespace NetworkServer
 
     internal class TcpSampleServer
     {        
+        private List<string> messages = new List<string>();
         private Dictionary<CustomClient, StreamWriter> _clients = new ();
 
         public async Task Run()
         {
             var server = TcpListener.Create(666);
             server.Start();
+            messages = JsonUtils.ReadFromFile<List<string>>("jsonTextSave.json");
 
             while(true)
             {
@@ -46,7 +49,7 @@ namespace NetworkServer
         }
 
         private async Task Serve(TcpClient client)
-        {    
+        {   
             try
             {
                 using (client)
@@ -65,20 +68,35 @@ namespace NetworkServer
                             tmpClient.userName = tmpUserName;
                         }
                     }
+                    var message = $"{tmpClient.userName} is connected";
+                    foreach (var kvp in _clients)
+                    {
+                        kvp.Value.WriteLine(message);
+                        await kvp.Value.FlushAsync();
+                    }
                     Console.WriteLine($"{tmpClient.userName} connected");
-
+                    foreach(var tmpMessage in messages)
+                    {
+                        writer.WriteLine(tmpMessage);
+                    }
                     
                     var nextLine = await reader.ReadLineAsync();
                     while (nextLine != null)
                     {
-                        var message = $"[{DateTime.Now.ToString(("dd/MM/yyyy"))} {DateTime.Now.ToString("HH:mm")}] {tmpClient.userName} : {nextLine}";
-                        Console.WriteLine(message);
+                        message = $"[{DateTime.Now.ToString(("dd/MM/yyyy"))} {DateTime.Now.ToString("HH:mm")}] {tmpClient.userName} : {nextLine}";
+                        messages.Add(message);
+                        if(messages.Count > 100)
+                        {
+                            messages.RemoveAt(0);
+                        }
+                        JsonUtils.WriteToFile(messages, "jsonTextSave.json");
+                        
                         foreach (var kvp in _clients)
                         {
                             kvp.Value.WriteLine(message);
                             await kvp.Value.FlushAsync();
                         }
-
+                        
                         nextLine = await reader.ReadLineAsync();
                     }
                 }
