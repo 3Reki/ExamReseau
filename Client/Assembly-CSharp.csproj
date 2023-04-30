@@ -43,6 +43,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Client.cs" />
      <Compile Include="Assets\Scripts\Display.cs" />
+     <Compile Include="Assets\Scripts\ConnectionPanel.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
