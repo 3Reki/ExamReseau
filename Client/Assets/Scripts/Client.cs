@@ -20,6 +20,12 @@ public class Client : MonoBehaviour
     private NetworkStream _stream;
     private bool isConnected;
 
+    private void OnDestroy()
+    {
+        _client.Close();
+        _client.Dispose();
+    }
+
     public new async void SendMessage(string text)
     {
         if (!isConnected)
@@ -27,15 +33,25 @@ public class Client : MonoBehaviour
             return;
         }
         
-        string message = $"[{DateTime.Now.ToString(("dd/MM/yyyy"))} {DateTime.Now.ToString("HH:mm")}] {username} : {text}";
-        _writer.WriteLine(message);
-        WriteText(message);
+        _writer.WriteLine(text);
         _inputField.text = string.Empty;
         await _writer.FlushAsync();
     }
 
     public async void Init()
     {
+        async Task DisplayLines()
+        {
+            var newLine = await _reader.ReadLineAsync();
+                
+            while(newLine != null)
+            {
+                WriteText(newLine);
+                newLine = await _reader.ReadLineAsync();
+            }
+        }
+
+        _client?.Close();
         _client = new TcpClient();
 
         await _client.ConnectAsync(ip, port);
@@ -45,45 +61,12 @@ public class Client : MonoBehaviour
         _writer = new StreamWriter(_stream);
 
         _textField.text = "";
-        
-        async Task DisplayLines()
-        {
-            var newLine = await _reader.ReadLineAsync();
-                
-            while(newLine != null)
-            {
-                WriteText(newLine);
-                newLine = await _reader.ReadLineAsync();
-            }
-        }
+
         _=DisplayLines();
         isConnected = true;
-    }
-    
-    // C'est plus utile ce truc si ?
-    public async Task Run()
-    {
-        // Connexion
-        async Task DisplayLines()
-        {
-            var newLine = await _reader.ReadLineAsync();
-                
-            while(newLine != null)
-            {
-                WriteText(newLine);
-                newLine = await _reader.ReadLineAsync();
-            }
-        }
-        _=DisplayLines();
-        Debug.Log("Type a line to send to the server");
-        while (true)
-        {
-            
-            var lineToSend = Console.ReadLine();
-            //Ligne envoyée
-            _writer.WriteLine($"{DateTime.Now.ToString(("dd/mm/yyyy"))} : {lineToSend}");
-            await _writer.FlushAsync();
-        }
+        
+        _writer.WriteLine(username);
+        await _writer.FlushAsync();
     }
 
     public void WriteText(string text)
