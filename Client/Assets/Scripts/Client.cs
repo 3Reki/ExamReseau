@@ -1,42 +1,43 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Client : MonoBehaviour
 {
+    public string ip;
+    public string username;
+    
     [SerializeField] private TMP_Text _textField;
     [SerializeField] private TMP_InputField _inputField;
-    [SerializeField] private string ip;
     [SerializeField] private int port;
-    
+
     private StreamReader _reader;
     private StreamWriter _writer;
     private TcpClient _client;
     private NetworkStream _stream;
+    private bool isConnected;
 
-    // Start is called before the first frame update
-    void Start()
+    public new async void SendMessage(string text)
     {
-        Init();
-    }
-
-    public async void SendMessage(string text)
-    {
-        Debug.Log($"{DateTime.Now.ToString(("dd/MM/yyyy"))} {DateTime.Now.ToString("HH:mm")} : {text}");
-        _writer.WriteLine($"{DateTime.Now.ToString(("dd/MM/yyyy"))} {DateTime.Now.ToString("HH:mm")} : {text}");
+        if (!isConnected)
+        {
+            return;
+        }
+        
+        string message = $"[{DateTime.Now.ToString(("dd/MM/yyyy"))} {DateTime.Now.ToString("HH:mm")}] {username} : {text}";
+        _writer.WriteLine(message);
+        WriteText(message);
+        _inputField.text = string.Empty;
         await _writer.FlushAsync();
     }
 
     public async void Init()
     {
         _client = new TcpClient();
+
         await _client.ConnectAsync(ip, port);
         
         _stream = _client.GetStream();
@@ -44,6 +45,19 @@ public class Client : MonoBehaviour
         _writer = new StreamWriter(_stream);
 
         _textField.text = "";
+        
+        async Task DisplayLines()
+        {
+            var newLine = await _reader.ReadLineAsync();
+                
+            while(newLine != null)
+            {
+                WriteText(newLine);
+                newLine = await _reader.ReadLineAsync();
+            }
+        }
+        _=DisplayLines();
+        isConnected = true;
     }
     
     // C'est plus utile ce truc si ?
