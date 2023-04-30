@@ -31,6 +31,7 @@ namespace NetworkServer
 
     internal class TcpSampleServer
     {        
+        private List<string> messages = new List<string>();
         private Dictionary<CustomClient, StreamWriter> _clients = new ();
 
         public async Task Run()
@@ -46,7 +47,7 @@ namespace NetworkServer
         }
 
         private async Task Serve(TcpClient client)
-        {    
+        {   
             try
             {
                 using (client)
@@ -72,6 +73,7 @@ namespace NetworkServer
                     while (nextLine != null)
                     {
                         var message = $"[{DateTime.Now.ToString(("dd/MM/yyyy"))} {DateTime.Now.ToString("HH:mm")}] {tmpClient.userName} : {nextLine}";
+                        messages.Add(message);
                         Console.WriteLine(message);
                         foreach (var kvp in _clients)
                         {
