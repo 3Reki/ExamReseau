@@ -55,7 +55,7 @@ namespace NetworkServer
                     using var writer = new StreamWriter(stream, leaveOpen: true);
                     CustomClient tmpClient = new CustomClient(client);
                     _clients.Add(tmpClient, writer);
-                    Console.WriteLine("Client connected");
+                    
                     while(string.IsNullOrEmpty(tmpClient.userName))
                     {
                         var tmpUserName = await reader.ReadLineAsync();
@@ -64,12 +64,13 @@ namespace NetworkServer
                             tmpClient.userName = tmpUserName;
                         }
                     }
+                    Console.WriteLine($"{tmpClient.userName} connected");
 
                     var nextLine = await reader.ReadLineAsync();
                     while (nextLine != null)
                     {
                         Console.WriteLine(nextLine.ToString());
-                        foreach (var kvp in _clients.Where(kvp => kvp.Key != tmpClient))
+                        foreach (var kvp in _clients)
                         {
                             kvp.Value.WriteLine(nextLine);
                             await kvp.Value.FlushAsync();
