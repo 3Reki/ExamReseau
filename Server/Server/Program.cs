@@ -34,11 +34,14 @@ namespace NetworkServer
                     _clients.Add(client, writer);
                     Console.WriteLine("Client connected");
 
+
                     var nextLine = await reader.ReadLineAsync();
                     while (nextLine != null)
                     {
+                        Console.WriteLine(nextLine.ToString());
                         foreach (var kvp in _clients.Where(kvp => kvp.Key != client))
                         {
+                            
                             kvp.Value.WriteLine(nextLine);
                             await kvp.Value.FlushAsync();
                         }
