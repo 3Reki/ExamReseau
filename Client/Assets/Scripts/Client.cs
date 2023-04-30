@@ -20,6 +20,12 @@ public class Client : MonoBehaviour
     private NetworkStream _stream;
     private bool isConnected;
 
+    private void OnDestroy()
+    {
+        _client.Close();
+        _client.Dispose();
+    }
+
     public new async void SendMessage(string text)
     {
         if (!isConnected)
@@ -28,7 +34,7 @@ public class Client : MonoBehaviour
         }
         
         string message = $"[{DateTime.Now.ToString(("dd/MM/yyyy"))} {DateTime.Now.ToString("HH:mm")}] {username} : {text}";
-        _writer.WriteLine(message);
+        _writer.WriteLine(text);
         WriteText(message);
         _inputField.text = string.Empty;
         await _writer.FlushAsync();
@@ -36,16 +42,6 @@ public class Client : MonoBehaviour
 
     public async void Init()
     {
-        _client = new TcpClient();
-
-        await _client.ConnectAsync(ip, port);
-        
-        _stream = _client.GetStream();
-        _reader = new StreamReader(_stream);
-        _writer = new StreamWriter(_stream);
-
-        _textField.text = "";
-        
         async Task DisplayLines()
         {
             var newLine = await _reader.ReadLineAsync();
@@ -56,8 +52,22 @@ public class Client : MonoBehaviour
                 newLine = await _reader.ReadLineAsync();
             }
         }
+        
+        _client = new TcpClient();
+
+        await _client.ConnectAsync(ip, port);
+        
+        _stream = _client.GetStream();
+        _reader = new StreamReader(_stream);
+        _writer = new StreamWriter(_stream);
+
+        _textField.text = "";
+
         _=DisplayLines();
         isConnected = true;
+        
+        _writer.WriteLine(username);
+        await _writer.FlushAsync();
     }
     
     // C'est plus utile ce truc si ?
