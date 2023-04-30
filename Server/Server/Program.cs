@@ -6,9 +6,31 @@ await server.Run();
 
 namespace NetworkServer
 {
+
+    public struct CustomClient
+    {
+        public CustomClient(TcpClient ptcpClient, string puserName)
+        {
+            tcpClient = ptcpClient;
+            userName = puserName;
+        }
+        public TcpClient tcpClient { get; set; }
+        public string userName { get; set; }
+
+        public static bool operator ==(CustomClient c1, CustomClient c2)
+        {
+            return c1.Equals(c2);
+        }
+
+        public static bool operator !=(CustomClient c1, CustomClient c2)
+        {
+            return !c1.Equals(c2);
+        }
+    }
+
     internal class TcpSampleServer
     {        
-        private Dictionary<TcpClient, StreamWriter> _clients = new ();
+        private Dictionary<CustomClient, StreamWriter> _clients = new ();
 
         public async Task Run()
         {
@@ -31,15 +53,17 @@ namespace NetworkServer
                     using var stream = client.GetStream();
                     using var reader = new StreamReader(stream, leaveOpen: true);
                     using var writer = new StreamWriter(stream, leaveOpen: true);
-                    _clients.Add(client, writer);
+                    CustomClient tmpClient = new CustomClient(client, "nulz");
+                    _clients.Add(tmpClient, writer);
                     Console.WriteLine("Client connected");
+
 
 
                     var nextLine = await reader.ReadLineAsync();
                     while (nextLine != null)
                     {
                         Console.WriteLine(nextLine.ToString());
-                        foreach (var kvp in _clients.Where(kvp => kvp.Key != client))
+                        foreach (var kvp in _clients.Where(kvp => kvp.Key != tmpClient))
                         {
                             
                             kvp.Value.WriteLine(nextLine);
@@ -48,7 +72,7 @@ namespace NetworkServer
 
                         nextLine = await reader.ReadLineAsync();
                     }
-                }                
+                }
             }    
             catch(Exception)
             {
@@ -56,7 +80,13 @@ namespace NetworkServer
             }
             finally
             {
-                _clients.Remove(client);
+                foreach(KeyValuePair<CustomClient, StreamWriter> entry in _clients)
+                {
+                    if(entry.Key.tcpClient == client)
+                    {
+                        _clients.Remove(entry.Key);
+                    }
+                }
             }
         }
     }
