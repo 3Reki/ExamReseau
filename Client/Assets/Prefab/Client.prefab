@@ -44,7 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ed5cf2ae7403dc4a8038ba91046b7f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _textField: {fileID: 0}
+  ip: 10.51.0.66
+  username: 
+  _textField: {fileID: 586128172944634912, guid: a98989fa338ccfa4e86e81cd72fcad76, type: 3}
+  scrollViewContent: {fileID: 0}
+  textPrefab: {fileID: 0}
   _inputField: {fileID: 0}
-  ip: 127.0.0.1
   port: 666
