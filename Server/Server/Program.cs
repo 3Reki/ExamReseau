@@ -9,7 +9,7 @@ namespace NetworkServer
 
     public struct CustomClient
     {
-        public CustomClient(TcpClient ptcpClient, string puserName)
+        public CustomClient(TcpClient ptcpClient, string puserName = "")
         {
             tcpClient = ptcpClient;
             userName = puserName;
@@ -53,11 +53,17 @@ namespace NetworkServer
                     using var stream = client.GetStream();
                     using var reader = new StreamReader(stream, leaveOpen: true);
                     using var writer = new StreamWriter(stream, leaveOpen: true);
-                    CustomClient tmpClient = new CustomClient(client, "nulz");
+                    CustomClient tmpClient = new CustomClient(client);
                     _clients.Add(tmpClient, writer);
                     Console.WriteLine("Client connected");
-
-
+                    while(string.IsNullOrEmpty(tmpClient.userName))
+                    {
+                        var tmpUserName = await reader.ReadLineAsync();
+                        if (!string.IsNullOrEmpty(tmpUserName))
+                        {
+                            tmpClient.userName = tmpUserName;
+                        }
+                    }
 
                     var nextLine = await reader.ReadLineAsync();
                     while (nextLine != null)
@@ -65,7 +71,6 @@ namespace NetworkServer
                         Console.WriteLine(nextLine.ToString());
                         foreach (var kvp in _clients.Where(kvp => kvp.Key != tmpClient))
                         {
-                            
                             kvp.Value.WriteLine(nextLine);
                             await kvp.Value.FlushAsync();
                         }
