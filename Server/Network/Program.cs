@@ -11,7 +11,7 @@ namespace NetworkClient
         public async Task Run()
         {
             using var client = new TcpClient();
-            await client.ConnectAsync("10.51.0.177", 666);
+            await client.ConnectAsync("10.51.0.66", 666);
 
             using var stream = client.GetStream();
             using var reader = new StreamReader(stream, leaveOpen: true);

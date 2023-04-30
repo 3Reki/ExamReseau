@@ -28,3 +28,18 @@ D:\Unity\ExamReseau\Server\Server\obj\Debug\net6.0\refint\Server.dll
 D:\Unity\ExamReseau\Server\Server\obj\Debug\net6.0\Server.pdb
 D:\Unity\ExamReseau\Server\Server\obj\Debug\net6.0\Server.genruntimeconfig.cache
 D:\Unity\ExamReseau\Server\Server\obj\Debug\net6.0\ref\Server.dll
+D:\Unity Projects\ExamReseau\Server\Server\bin\Debug\net6.0\Server.exe
+D:\Unity Projects\ExamReseau\Server\Server\bin\Debug\net6.0\Server.deps.json
+D:\Unity Projects\ExamReseau\Server\Server\bin\Debug\net6.0\Server.runtimeconfig.json
+D:\Unity Projects\ExamReseau\Server\Server\bin\Debug\net6.0\Server.dll
+D:\Unity Projects\ExamReseau\Server\Server\bin\Debug\net6.0\Server.pdb
+D:\Unity Projects\ExamReseau\Server\Server\obj\Debug\net6.0\Server.csproj.AssemblyReference.cache
+D:\Unity Projects\ExamReseau\Server\Server\obj\Debug\net6.0\Server.GeneratedMSBuildEditorConfig.editorconfig
+D:\Unity Projects\ExamReseau\Server\Server\obj\Debug\net6.0\Server.AssemblyInfoInputs.cache
+D:\Unity Projects\ExamReseau\Server\Server\obj\Debug\net6.0\Server.AssemblyInfo.cs
+D:\Unity Projects\ExamReseau\Server\Server\obj\Debug\net6.0\Server.csproj.CoreCompileInputs.cache
+D:\Unity Projects\ExamReseau\Server\Server\obj\Debug\net6.0\Server.dll
+D:\Unity Projects\ExamReseau\Server\Server\obj\Debug\net6.0\refint\Server.dll
+D:\Unity Projects\ExamReseau\Server\Server\obj\Debug\net6.0\Server.pdb
+D:\Unity Projects\ExamReseau\Server\Server\obj\Debug\net6.0\Server.genruntimeconfig.cache
+D:\Unity Projects\ExamReseau\Server\Server\obj\Debug\net6.0\ref\Server.dll
