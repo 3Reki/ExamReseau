@@ -55,20 +55,38 @@ public class Client : MonoBehaviour
             }
         }
 
-        _client?.Close();
-        _client = new TcpClient();
-
-        await _client.ConnectAsync(ip, port);
+        if (_client != null)
+        {
+            _client.Close();
+            foreach (Transform elem in scrollViewContent)
+            {
+                Destroy(elem.gameObject);
+            }
+        }
         
-        _stream = _client.GetStream();
-        _reader = new StreamReader(_stream);
-        _writer = new StreamWriter(_stream);
+        try
+        {
+            _client = new TcpClient();
 
-        _=DisplayLines();
-        isConnected = true;
+            WriteText("Attempting connection to " + ip + "...");
+            await _client.ConnectAsync(ip, port);
+            WriteText("Connected to " + ip + ".");
         
-        _writer.WriteLine(username);
-        await _writer.FlushAsync();
+            _stream = _client.GetStream();
+            _reader = new StreamReader(_stream);
+            _writer = new StreamWriter(_stream);
+
+            _=DisplayLines();
+            isConnected = true;
+        
+            _writer.WriteLine(username);
+            await _writer.FlushAsync();
+        }
+        catch (Exception e)
+        {
+            WriteText("Failed to connect.");
+            throw;
+        }
     }
 
     public void WriteText(string text)

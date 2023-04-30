@@ -986,6 +986,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 4912664615996580236, guid: 7721555f16063504c84ae1e901ad5e91, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 53.029
+      objectReference: {fileID: 0}
+    - target: {fileID: 4912664615996580236, guid: 7721555f16063504c84ae1e901ad5e91, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 46.514465
+      objectReference: {fileID: 0}
+    - target: {fileID: 4912664615996580237, guid: 7721555f16063504c84ae1e901ad5e91, type: 3}
+      propertyPath: m_LineType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4912664615996580237, guid: 7721555f16063504c84ae1e901ad5e91, type: 3}
+      propertyPath: m_GlobalPointSize
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 4912664615996580237, guid: 7721555f16063504c84ae1e901ad5e91, type: 3}
+      propertyPath: m_OnFocusSelectAll
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4912664615996580237, guid: 7721555f16063504c84ae1e901ad5e91, type: 3}
+      propertyPath: m_RestoreOriginalTextOnEscape
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4912664615996580237, guid: 7721555f16063504c84ae1e901ad5e91, type: 3}
       propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -993,6 +1017,30 @@ PrefabInstance:
     - target: {fileID: 4912664615996580237, guid: 7721555f16063504c84ae1e901ad5e91, type: 3}
       propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SendMessage
+      objectReference: {fileID: 0}
+    - target: {fileID: 4912664617531855026, guid: 7721555f16063504c84ae1e901ad5e91, type: 3}
+      propertyPath: m_fontSize
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 4912664617531855026, guid: 7721555f16063504c84ae1e901ad5e91, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 4912664617531855026, guid: 7721555f16063504c84ae1e901ad5e91, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4912664617615688840, guid: 7721555f16063504c84ae1e901ad5e91, type: 3}
+      propertyPath: m_fontSize
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 4912664617615688840, guid: 7721555f16063504c84ae1e901ad5e91, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 4912664617615688840, guid: 7721555f16063504c84ae1e901ad5e91, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5134457240518510278, guid: 7721555f16063504c84ae1e901ad5e91, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1185,6 +1233,10 @@ PrefabInstance:
     - target: {fileID: 6820533678399737386, guid: 7721555f16063504c84ae1e901ad5e91, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7748918594184081883, guid: 7721555f16063504c84ae1e901ad5e91, type: 3}
+      propertyPath: m_Value
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7791693345760936222, guid: 7721555f16063504c84ae1e901ad5e91, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1413,6 +1465,14 @@ PrefabInstance:
     - target: {fileID: 8787970970191848929, guid: 7721555f16063504c84ae1e901ad5e91, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9017738128286162450, guid: 7721555f16063504c84ae1e901ad5e91, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -73.029
+      objectReference: {fileID: 0}
+    - target: {fileID: 9017738128286162450, guid: 7721555f16063504c84ae1e901ad5e91, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 36.514
       objectReference: {fileID: 0}
     - target: {fileID: 9058036311774066098, guid: 7721555f16063504c84ae1e901ad5e91, type: 3}
       propertyPath: m_AnchorMax.y
