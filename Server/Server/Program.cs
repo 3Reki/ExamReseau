@@ -1,5 +1,6 @@
 ﻿using System.Net.Sockets;
 using NetworkServer;
+using static System.Net.Mime.MediaTypeNames;
 
 var server = new TcpSampleServer();
 await server.Run();
@@ -66,13 +67,15 @@ namespace NetworkServer
                     }
                     Console.WriteLine($"{tmpClient.userName} connected");
 
+                    
                     var nextLine = await reader.ReadLineAsync();
                     while (nextLine != null)
                     {
-                        Console.WriteLine(nextLine.ToString());
+                        var message = $"[{DateTime.Now.ToString(("dd/MM/yyyy"))} {DateTime.Now.ToString("HH:mm")}] {tmpClient.userName} : {nextLine}";
+                        Console.WriteLine(message);
                         foreach (var kvp in _clients)
                         {
-                            kvp.Value.WriteLine(nextLine);
+                            kvp.Value.WriteLine(message);
                             await kvp.Value.FlushAsync();
                         }
 
