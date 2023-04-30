@@ -39,7 +39,10 @@ namespace NetworkServer
         {
             var server = TcpListener.Create(666);
             server.Start();
-            messages = JsonUtils.ReadFromFile<List<string>>("jsonTextSave.json");
+            if (File.Exists("jsonTextSave.json"))
+            {
+                messages = JsonUtils.ReadFromFile<List<string>>("jsonTextSave.json");
+            }
 
             while(true)
             {
@@ -78,6 +81,7 @@ namespace NetworkServer
                     foreach(var tmpMessage in messages)
                     {
                         writer.WriteLine(tmpMessage);
+                        await writer.FlushAsync();
                     }
                     
                     var nextLine = await reader.ReadLineAsync();
