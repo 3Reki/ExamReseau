@@ -83,9 +83,9 @@ namespace NetworkServer
                     }
                 }
             }    
-            catch(Exception)
+            catch(Exception e)
             {
-                Console.WriteLine("Wtf ça marche pas");
+                Console.WriteLine($"Wtf ça marche pas : {e}");
             }
             finally
             {
