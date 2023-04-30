@@ -33,9 +33,7 @@ public class Client : MonoBehaviour
             return;
         }
         
-        string message = $"[{DateTime.Now.ToString(("dd/MM/yyyy"))} {DateTime.Now.ToString("HH:mm")}] {username} : {text}";
         _writer.WriteLine(text);
-        WriteText(message);
         _inputField.text = string.Empty;
         await _writer.FlushAsync();
     }
@@ -52,7 +50,8 @@ public class Client : MonoBehaviour
                 newLine = await _reader.ReadLineAsync();
             }
         }
-        
+
+        _client?.Close();
         _client = new TcpClient();
 
         await _client.ConnectAsync(ip, port);
@@ -68,32 +67,6 @@ public class Client : MonoBehaviour
         
         _writer.WriteLine(username);
         await _writer.FlushAsync();
-    }
-    
-    // C'est plus utile ce truc si ?
-    public async Task Run()
-    {
-        // Connexion
-        async Task DisplayLines()
-        {
-            var newLine = await _reader.ReadLineAsync();
-                
-            while(newLine != null)
-            {
-                WriteText(newLine);
-                newLine = await _reader.ReadLineAsync();
-            }
-        }
-        _=DisplayLines();
-        Debug.Log("Type a line to send to the server");
-        while (true)
-        {
-            
-            var lineToSend = Console.ReadLine();
-            //Ligne envoyée
-            _writer.WriteLine($"{DateTime.Now.ToString(("dd/mm/yyyy"))} : {lineToSend}");
-            await _writer.FlushAsync();
-        }
     }
 
     public void WriteText(string text)
