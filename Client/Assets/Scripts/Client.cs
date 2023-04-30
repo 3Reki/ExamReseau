@@ -1,16 +1,20 @@
 using System;
+using System.Collections;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 using System.IO;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Client : MonoBehaviour
 {
     public string ip;
     public string username;
     
-    [SerializeField] private TMP_Text _textField;
+    [SerializeField] private Transform scrollViewContent;
+    [SerializeField] private ScrollRect scrollRect;
+    [SerializeField] private TextMeshProUGUI textPrefab;
     [SerializeField] private TMP_InputField _inputField;
     [SerializeField] private int port;
 
@@ -22,13 +26,13 @@ public class Client : MonoBehaviour
 
     private void OnDestroy()
     {
-        _client.Close();
-        _client.Dispose();
+        _client?.Close();
+        _client?.Dispose();
     }
 
     public new async void SendMessage(string text)
     {
-        if (!isConnected)
+        if (!isConnected || string.IsNullOrEmpty(text))
         {
             return;
         }
@@ -60,8 +64,6 @@ public class Client : MonoBehaviour
         _reader = new StreamReader(_stream);
         _writer = new StreamWriter(_stream);
 
-        _textField.text = "";
-
         _=DisplayLines();
         isConnected = true;
         
@@ -71,6 +73,20 @@ public class Client : MonoBehaviour
 
     public void WriteText(string text)
     {
-        _textField.text += text + "\n";
+        bool shouldScroll = scrollRect.verticalNormalizedPosition < 0.005f;
+        TextMeshProUGUI newMessage = Instantiate(textPrefab, scrollViewContent);
+        newMessage.text = text;
+        if (shouldScroll)
+        {
+            StartCoroutine(AutoScroll());
+        }
+    }
+
+    private readonly WaitForEndOfFrame waitForEndOfFrame = new();
+
+    private IEnumerator AutoScroll()
+    {
+        yield return waitForEndOfFrame;
+        scrollRect.verticalNormalizedPosition = 0f;
     }
 }
