@@ -29,8 +29,10 @@ public class Client : MonoBehaviour
 
     public async void SendMessage(string text)
     {
-        Debug.Log($"{DateTime.Now.ToString(("dd/MM/yyyy"))} {DateTime.Now.ToString("HH:mm")} : {text}");
-        _writer.WriteLine($"{DateTime.Now.ToString(("dd/MM/yyyy"))} {DateTime.Now.ToString("HH:mm")} : {text}");
+        string message = $"{DateTime.Now.ToString(("dd/MM/yyyy"))} {DateTime.Now.ToString("HH:mm")} : {text}";
+        _writer.WriteLine(message);
+        WriteText(message);
+        _inputField.text = string.Empty;
         await _writer.FlushAsync();
     }
 
@@ -44,6 +46,18 @@ public class Client : MonoBehaviour
         _writer = new StreamWriter(_stream);
 
         _textField.text = "";
+        
+        async Task DisplayLines()
+        {
+            var newLine = await _reader.ReadLineAsync();
+                
+            while(newLine != null)
+            {
+                WriteText(newLine);
+                newLine = await _reader.ReadLineAsync();
+            }
+        }
+        _=DisplayLines();
     }
     
     // C'est plus utile ce truc si ?

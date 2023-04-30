@@ -510,6 +510,10 @@ PrefabInstance:
       value: Client
       objectReference: {fileID: 0}
     - target: {fileID: 5977002407297451315, guid: 47698e3232e9146488f39232566f0c6f, type: 3}
+      propertyPath: ip
+      value: 10.51.0.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977002407297451315, guid: 47698e3232e9146488f39232566f0c6f, type: 3}
       propertyPath: _textField
       value: 
       objectReference: {fileID: 65882104}
